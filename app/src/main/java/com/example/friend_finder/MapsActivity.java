@@ -8,6 +8,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import java.io.IOException;
@@ -57,7 +58,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap = googleMap;
 
         // Add a marker over The Senate Building and also fetch and Display Locations of Friends
-        LatLng senate = new LatLng(51.299005, 1.069871);
+        LatLng senate = new LatLng(51.297500, 1.069722);
         mMap.addMarker(new MarkerOptions().position(senate).title("Senate Building University of Kent"));
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(senate, 15));
 
@@ -132,7 +133,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 ex.printStackTrace();
                 Log.e(LOG_TAG, "onPostExecute method entered an exception", ex);
             }
-
         }
 
         /**
@@ -148,20 +148,21 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             for (int i = 0; i < jsonArray.length(); i++) {
                 // Create marker for each city in the JSON data
                 JSONObject jsonObj = jsonArray.getJSONObject(i);
+
                 Log.i("Nihin An Object in the Array is ", jsonObj.toString());
-                Log.i("Nihin ", "-----------------------------------------------------");
-                Log.i("Nihin, Name is ", jsonObj.getString("name"));
-                Log.i("Nihin, Latitude is ", jsonObj.getString("lat"));
-                Log.i("Nihin, Longitude is ", jsonObj.getString("lon"));
 
                 String markerTitle = jsonObj.getString("name");
                 double lat = Double.parseDouble(jsonObj.getString("lat"));
                 double lon = Double.parseDouble(jsonObj.getString("lon"));
 
                 LatLng friend = new LatLng(lat, lon);
-                Log.i("Nihin In the displayFriendsOnMap ", mMap.toString());
 
-                mMap.addMarker(new MarkerOptions().position(friend).title(markerTitle));
+                mMap.addMarker(new MarkerOptions()
+                        .position(friend)
+                        .title(markerTitle)
+                        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)));
+
+                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(friend, 15));
             }
         }
     }
