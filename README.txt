@@ -15,8 +15,7 @@ Versioning
 1st of March, 2019
 
 Authors
-Billie Thompson - Initial work - PurpleBooth
-See also the list of contributors who participated in this project.
+Nihinlolamiwa Fajemilehin
 
 License
 This project is licensed under the MIT License - see the LICENSE.md file for details

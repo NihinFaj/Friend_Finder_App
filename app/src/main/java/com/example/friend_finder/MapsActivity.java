@@ -6,6 +6,7 @@ import android.os.AsyncTask;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -84,7 +85,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             LatLng senate = new LatLng(DEFAULT_LATITUDE, DEFAULT_LONGITUDE);
             mMap.addMarker(new MarkerOptions()
                     .position(senate)
-                    .snippet("I stay am at this location")
+                    .snippet("I am at this location")
                     .title("Senate Building University of Kent, " + getFriends.retrieveFullAddress(DEFAULT_LATITUDE, DEFAULT_LONGITUDE)));
 
             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(senate, 15));
@@ -96,6 +97,38 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             mMap.getUiSettings().setZoomGesturesEnabled(true);
             }
       }
+
+    /**
+     * Method to show the Default Map when clicked
+      * @param view
+     */
+    public void onNormalMap(View view) {
+        mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+    }
+
+    /**
+     * Method to show the Satellite Map when clicked
+     * @param view
+     */
+    public void onSatelliteMap(View view) {
+        mMap.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
+    }
+
+    /**
+     * Method to show the Terrain Map when clicked
+     * @param view
+     */
+    public void onTerrainMap(View view) {
+        mMap.setMapType(GoogleMap.MAP_TYPE_TERRAIN);
+    }
+
+    /**
+     * Method to show the Hybrid Map when clicked
+     * @param view
+     */
+    public void onHybridMap(View view) {
+        mMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
+    }
 
     /**
      * A class that extends the AsyncTask Class, its function is to retrieve the Longitude and Latitude of all
@@ -191,7 +224,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     mMap.addMarker(new MarkerOptions()
                             .position(friend)
                             .title(retrieveFullAddress(lat, lon))
-                            .snippet(markerTitle + "is at this location.")
+                            .snippet(markerTitle + " is at this location.")
                             .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)));
 
                     mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(friend, 15));
@@ -210,7 +243,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         public String retrieveFullAddress(double latitude, double longitude) {
 
             Geocoder geocoder = new Geocoder(MapsActivity.this);
-            List<Address> addressList = new ArrayList<Address>();
+            List<Address> addressList = new ArrayList<>();
             try {
                 addressList = geocoder.getFromLocation(latitude, longitude, 1);
             }
