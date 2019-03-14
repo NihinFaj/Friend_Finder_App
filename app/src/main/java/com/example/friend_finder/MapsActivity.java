@@ -1,5 +1,7 @@
 package com.example.friend_finder;
 
+import android.location.Address;
+import android.location.Geocoder;
 import android.os.AsyncTask;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
@@ -15,6 +17,9 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.json.JSONException;
 import org.json.*;
 
@@ -62,17 +67,26 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
-        // Add a marker over The Senate Building and also fetch and Display Locations of Friends
-        LatLng senate = new LatLng(51.297500, 1.069722);
-        mMap.addMarker(new MarkerOptions().position(senate).title("Senate Building University of Kent"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(senate, 16));
+        // Checks if Map object has been initialized
+        if (mMap != null) {
 
-        // Allows zooming in and out of the Map, using the built-in zoom controls that appear in the bottom right hand corner of the map
-        mMap.getUiSettings().setZoomControlsEnabled(true);
+            GetFriends getFriends = new GetFriends();
 
-        // Allows zooming in and out using two fingers
-        mMap.getUiSettings().setZoomGesturesEnabled(true);
-        mMap.setBuildingsEnabled(true);
+            // Add a marker over The Senate Building and also fetch and Display Locations of Friends
+            LatLng senate = new LatLng(51.297500, 1.069722);
+            mMap.addMarker(new MarkerOptions()
+                    .position(senate)
+                    .title("Senate Building University of Kent" + "\n" + getFriends.retrieveFullAddress(51.297500, 1.069722)));
+
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(senate, 15));
+
+            // Allows zooming in and out of the Map, using the built-in zoom controls that appear in the bottom right hand corner of the map
+            mMap.getUiSettings().setZoomControlsEnabled(true);
+
+            // Allows zooming in and out using two fingers
+            mMap.getUiSettings().setZoomGesturesEnabled(true);
+            mMap.setBuildingsEnabled(true);
+            }
       }
 
     /**
@@ -164,13 +178,38 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
                 LatLng friend = new LatLng(lat, lon);
 
-                mMap.addMarker(new MarkerOptions()
-                        .position(friend)
-                        .title(markerTitle)
-                        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)));
+                // Checks if Map object has been initialized
+                if(mMap != null) {
+                    mMap.addMarker(new MarkerOptions()
+                            .position(friend)
+                            .title(markerTitle + "\n" + retrieveFullAddress(lat, lon))
+                            .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)));
 
-                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(friend, 16));
+                    mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(friend, 15));
+                }
             }
+        }
+
+        /**
+         * Method that takes the Latitude and Longitude of a location and
+         * returns it's full Address
+         *
+         * @param latitude The Latitude of the location whose full address is to be retrieved
+         * @param longitude The Longitude of the location whose full address is to be retrieved
+         * @return String A full description of the location's Address
+         */
+        public String retrieveFullAddress(double latitude, double longitude) {
+
+            Geocoder geocoder = new Geocoder(MapsActivity.this);
+            List<Address> addressList = new ArrayList<Address>();
+            try {
+                addressList = geocoder.getFromLocation(51.297500, 1.069722, 1);
+            }
+            catch(IOException e) {
+                Log.e(LOG_TAG, "Error retrieving location details", e);
+            }
+            Address address = addressList.get(0);
+            return address.getAddressLine(0);
         }
     }
 }
