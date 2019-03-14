@@ -7,7 +7,6 @@ import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -22,7 +21,6 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-
 import org.json.JSONException;
 import org.json.*;
 
@@ -30,7 +28,7 @@ import org.json.*;
  * A Map Activity App that shows my location(which is University of Kent Senate Building),
  * fetches the locations of my friends from a server and displays them all on the Map using Markers
  *
- * @author Nihinlolamiwa Fajemilehin
+ * @author Nihinlolamiwa Fajemilehin (ndf3@kent.ac.uk)
  * @version 2019.03.01
  */
 
@@ -73,9 +71,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-        mMap.setTrafficEnabled(true);
-        //mMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
-
         // Checks if Map object has been initialized
         if (mMap != null) {
 
@@ -93,8 +88,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
             // Allows zooming in and out of the Map, using the built-in zoom controls that appear in the bottom right hand corner of the map
             mMap.getUiSettings().setZoomControlsEnabled(true);
+            mMap.setTrafficEnabled(true);
 
-            }
+        }
       }
 
     /**
@@ -247,7 +243,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 addressList = geocoder.getFromLocation(latitude, longitude, 1);
             }
             catch(IOException e) {
-                Log.e(LOG_TAG, "Error retrieving location details", e);
+                Log.e(LOG_TAG, "Error retrieving location address details", e);
             }
             Address address = addressList.get(0);
             return address.getAddressLine(0);
