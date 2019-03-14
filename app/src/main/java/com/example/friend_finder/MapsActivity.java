@@ -73,6 +73,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
+        mMap.setTrafficEnabled(true);
         //mMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
 
         // Checks if Map object has been initialized
@@ -93,8 +94,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             // Allows zooming in and out of the Map, using the built-in zoom controls that appear in the bottom right hand corner of the map
             mMap.getUiSettings().setZoomControlsEnabled(true);
 
-            // Allows zooming in and out using two fingers
-            mMap.getUiSettings().setZoomGesturesEnabled(true);
             }
       }
 
