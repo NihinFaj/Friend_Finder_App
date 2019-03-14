@@ -6,12 +6,14 @@ import android.os.AsyncTask;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.util.Log;
+
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -70,6 +72,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
+        //mMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
 
         // Checks if Map object has been initialized
         if (mMap != null) {
@@ -81,6 +84,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             LatLng senate = new LatLng(DEFAULT_LATITUDE, DEFAULT_LONGITUDE);
             mMap.addMarker(new MarkerOptions()
                     .position(senate)
+                    .snippet("I stay am at this location")
                     .title("Senate Building University of Kent, " + getFriends.retrieveFullAddress(DEFAULT_LATITUDE, DEFAULT_LONGITUDE)));
 
             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(senate, 15));
@@ -186,9 +190,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 if(mMap != null) {
                     mMap.addMarker(new MarkerOptions()
                             .position(friend)
-//                            .title(markerTitle + "\n" + retrieveFullAddress(lat, lon))
                             .title(retrieveFullAddress(lat, lon))
-
+                            .snippet(markerTitle + "is at this location.")
                             .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)));
 
                     mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(friend, 15));
