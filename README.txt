@@ -17,5 +17,10 @@ Versioning
 Authors
 Nihinlolamiwa Fajemilehin
 
+Functionalities
+1) Display a map with a marker that includes my defined location
+2) Display further markers of locations of my friends, whose Latitude and Longitude values are fetched from a server
+3) Allow the switch between between several Map types
+
 License
 This project is licensed under the MIT License - see the LICENSE.md file for details
