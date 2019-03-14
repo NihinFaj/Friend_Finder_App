@@ -34,7 +34,7 @@ import org.json.*;
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
     //The URL to fetch JSON information of Friends from
-    private static final String KENTURL = "https://www.cs.kent.ac.uk/people/staff/iau/LocalUsers.php";
+    private static final String KENT_URL = "https://www.cs.kent.ac.uk/people/staff/iau/LocalUsers.php";
     //The Tag Value to be logged, when code enters an exception
     private static final String LOG_TAG = "FriendFinderApp";
     //A declaration of the GoogleMap object
@@ -42,9 +42,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     // A string that stores JSON value retrieved from the server
     private String convertedJSON;
     //My default Latitude, which is the Senate building
-    private static final double DEFAULTLATITUDE = 51.297500;
+    private static final double DEFAULT_LATITUDE = 51.297500;
     //My default Longitude, which is the Senate building
-    private static final double DEFAULTLONGITUDE = 1.069722;
+    private static final double DEFAULT_LONGITUDE = 1.069722;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +55,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
-        new GetFriends().execute(KENTURL);
+        new GetFriends().execute(KENT_URL);
     }
 
     /**
@@ -78,10 +78,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             GetFriends getFriends = new GetFriends();
 
             // Add a marker over The Senate Building
-            LatLng senate = new LatLng(DEFAULTLATITUDE, DEFAULTLONGITUDE);
+            LatLng senate = new LatLng(DEFAULT_LATITUDE, DEFAULT_LONGITUDE);
             mMap.addMarker(new MarkerOptions()
                     .position(senate)
-                    .title("Senate Building University of Kent" + "\n" + getFriends.retrieveFullAddress(DEFAULTLATITUDE, DEFAULTLONGITUDE)));
+                    .title("Senate Building University of Kent, " + getFriends.retrieveFullAddress(DEFAULT_LATITUDE, DEFAULT_LONGITUDE)));
 
             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(senate, 15));
 
@@ -90,7 +90,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
             // Allows zooming in and out using two fingers
             mMap.getUiSettings().setZoomGesturesEnabled(true);
-            mMap.setBuildingsEnabled(true);
             }
       }
 
@@ -187,7 +186,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 if(mMap != null) {
                     mMap.addMarker(new MarkerOptions()
                             .position(friend)
-                            .title(markerTitle + "\n" + retrieveFullAddress(lat, lon))
+//                            .title(markerTitle + "\n" + retrieveFullAddress(lat, lon))
+                            .title(retrieveFullAddress(lat, lon))
+
                             .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)));
 
                     mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(friend, 15));
@@ -208,7 +209,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             Geocoder geocoder = new Geocoder(MapsActivity.this);
             List<Address> addressList = new ArrayList<Address>();
             try {
-                addressList = geocoder.getFromLocation(51.297500, 1.069722, 1);
+                addressList = geocoder.getFromLocation(latitude, longitude, 1);
             }
             catch(IOException e) {
                 Log.e(LOG_TAG, "Error retrieving location details", e);
