@@ -100,7 +100,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     /**
      * Method to show the Default Map when clicked
-      * @param view
+      * @param view The view to be used
      */
     public void onNormalMap(View view) {
         mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
@@ -108,7 +108,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     /**
      * Method to show the Satellite Map when clicked
-     * @param view
+     * @param view The view to be used
      */
     public void onSatelliteMap(View view) {
         mMap.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
@@ -116,7 +116,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     /**
      * Method to show the Terrain Map when clicked
-     * @param view
+     * @param view The view to be used
      */
     public void onTerrainMap(View view) {
         mMap.setMapType(GoogleMap.MAP_TYPE_TERRAIN);
@@ -124,7 +124,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     /**
      * Method to show the Hybrid Map when clicked
-     * @param view
+     * @param view The view to be used
      */
     public void onHybridMap(View view) {
         mMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
