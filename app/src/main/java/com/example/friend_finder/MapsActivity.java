@@ -19,7 +19,8 @@ import org.json.JSONException;
 import org.json.*;
 
 /**
- * A Map App that shows my location, fetches other locations from a server and displays them all on the Map
+ * A Map Activity App that shows my location(which is University of Kent Senate Building),
+ * fetches the locations of my friends from a server and displays them all on the Map using Markers
  *
  * @author Nihinlolamiwa Fajemilehin
  * @version 2019.03.01
@@ -27,9 +28,13 @@ import org.json.*;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
+    //The URL to fetch JSON information of Friends from
     private static final String kentURL = "https://www.cs.kent.ac.uk/people/staff/iau/LocalUsers.php";
+    //The Tag Value to be logged, when code enters an exception
     private static final String LOG_TAG = "FriendFinderApp";
+    //A declaration of the GoogleMap object
     private GoogleMap mMap;
+    //
     private String convertedJSON;
 
     @Override
@@ -67,10 +72,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         // Allows zooming in and out using two fingers
         mMap.getUiSettings().setZoomGesturesEnabled(true);
+        mMap.setBuildingsEnabled(true);
       }
 
     /**
-     *
+     * A class that extends the AsyncTask Class, its function is to retrieve the Longitude and Latitude of all
+     * friends and display them as markers on the Map
      */
 
     public class GetFriends extends AsyncTask<String, Void, Void> {
@@ -86,7 +93,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         /**
          * doInBackground Method, that makes connection to the server and fetches data
          * @param urls
-         * @return Void Object
+         * @return Void Returns a Void Object
          */
         @Override
         protected Void doInBackground(String... urls) {
@@ -122,7 +129,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
 
         /**
-         *  onPostExecute Method that is called after all background process is complete
+         *  onPostExecute Method that is called after background process is complete
+         * @param unused
           */
         @Override
         protected void onPostExecute(Void unused) {
@@ -136,7 +144,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
 
         /**
-         * displayFriendsOnMap method which displays Friend Markers on the Map
+         * displayFriendsOnMap method which displays Friend Markers on the Map with a different colour of that of the
+         * Senate Building Marker
          * @throws JSONException
          */
         protected void displayFriendsOnMap()
@@ -148,8 +157,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             for (int i = 0; i < jsonArray.length(); i++) {
                 // Create marker for each city in the JSON data
                 JSONObject jsonObj = jsonArray.getJSONObject(i);
-
-                Log.i("Nihin An Object in the Array is ", jsonObj.toString());
 
                 String markerTitle = jsonObj.getString("name");
                 double lat = Double.parseDouble(jsonObj.getString("lat"));
