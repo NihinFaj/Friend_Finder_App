@@ -34,7 +34,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private static final String LOG_TAG = "FriendFinderApp";
     //A declaration of the GoogleMap object
     private GoogleMap mMap;
-    //
+    // A string that stores JSON value retrieved from the server
     private String convertedJSON;
 
     @Override
@@ -65,7 +65,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         // Add a marker over The Senate Building and also fetch and Display Locations of Friends
         LatLng senate = new LatLng(51.297500, 1.069722);
         mMap.addMarker(new MarkerOptions().position(senate).title("Senate Building University of Kent"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(senate, 15));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(senate, 16));
 
         // Allows zooming in and out of the Map, using the built-in zoom controls that appear in the bottom right hand corner of the map
         mMap.getUiSettings().setZoomControlsEnabled(true);
@@ -169,7 +169,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         .title(markerTitle)
                         .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)));
 
-                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(friend, 15));
+                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(friend, 16));
             }
         }
     }
