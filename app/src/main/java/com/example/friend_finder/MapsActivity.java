@@ -34,13 +34,17 @@ import org.json.*;
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
     //The URL to fetch JSON information of Friends from
-    private static final String kentURL = "https://www.cs.kent.ac.uk/people/staff/iau/LocalUsers.php";
+    private static final String KENTURL = "https://www.cs.kent.ac.uk/people/staff/iau/LocalUsers.php";
     //The Tag Value to be logged, when code enters an exception
     private static final String LOG_TAG = "FriendFinderApp";
     //A declaration of the GoogleMap object
     private GoogleMap mMap;
     // A string that stores JSON value retrieved from the server
     private String convertedJSON;
+    //My default Latitude, which is the Senate building
+    private static final double DEFAULTLATITUDE = 51.297500;
+    //My default Longitude, which is the Senate building
+    private static final double DEFAULTLONGITUDE = 1.069722;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +55,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
-        new GetFriends().execute(kentURL);
+        new GetFriends().execute(KENTURL);
     }
 
     /**
@@ -70,13 +74,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         // Checks if Map object has been initialized
         if (mMap != null) {
 
+            //Initialize the GetFriends Class
             GetFriends getFriends = new GetFriends();
 
-            // Add a marker over The Senate Building and also fetch and Display Locations of Friends
-            LatLng senate = new LatLng(51.297500, 1.069722);
+            // Add a marker over The Senate Building
+            LatLng senate = new LatLng(DEFAULTLATITUDE, DEFAULTLONGITUDE);
             mMap.addMarker(new MarkerOptions()
                     .position(senate)
-                    .title("Senate Building University of Kent" + "\n" + getFriends.retrieveFullAddress(51.297500, 1.069722)));
+                    .title("Senate Building University of Kent" + "\n" + getFriends.retrieveFullAddress(DEFAULTLATITUDE, DEFAULTLONGITUDE)));
 
             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(senate, 15));
 
