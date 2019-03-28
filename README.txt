@@ -1,26 +1,26 @@
-Project Title
+#Project Title
 Friend Finder App
 
-Getting Started
+#Getting Started
 Clone the project with the command git clone https://github.com/NihinlolaFaj/Friend_Finder_App
 
-Prerequisites
+#Prerequisites
 You need to have Android Studio installed to be able to open and modify this project
 
-Built With
+#Built With
 Android Studio - The IDE used
 Java - The programming language used
 
-Versioning
+#Versioning
 1st of March, 2019
 
-Authors
+#Authors
 Nihinlolamiwa Fajemilehin
 
-Functionalities
+#Functionalities
 1) Display a map with a marker that includes my defined location
 2) Display further markers of locations of my friends, whose Latitude and Longitude values are fetched from a server
 3) Allow the switch between several Map types
 
-License
+#License
 This project is licensed under the MIT License - see the LICENSE.md file for details
