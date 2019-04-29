@@ -23,4 +23,4 @@ Nihinlolamiwa Fajemilehin
 3) Allow the switch between several Map types
 
 # License
-This project is licensed under the MIT License - see the LICENSE.md file for details
+This project is licensed under the MIT License.
