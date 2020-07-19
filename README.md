@@ -2,7 +2,7 @@
 Friend Finder App
 
 # Getting Started
-Clone the project with the command git clone https://github.com/NihinlolaFaj/Friend_Finder_App
+Clone the project with the command git clone https://github.com/NihinFaj/Friend_Finder_App
 
 # Prerequisites
 You need to have Android Studio installed to be able to open and modify this project
