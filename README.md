@@ -1,5 +1,4 @@
-# Project Title
-Friend Finder App
+# Friend Finder App
 
 ## Getting Started
 Clone the project with the command git clone https://github.com/NihinFaj/Friend_Finder_App
