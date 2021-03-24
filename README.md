@@ -7,8 +7,8 @@ Clone the project with the command git clone https://github.com/NihinFaj/Friend_
 You need to have Android Studio installed to be able to open and modify this project
 
 ## Built With
-Android Studio - The IDE used
-Java - The programming language used
+- Android Studio: The IDE used
+- Java: The programming language used
 
 ## Versioning
 1st of March, 2019
