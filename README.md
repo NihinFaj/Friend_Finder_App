@@ -1,4 +1,5 @@
 # Friend Finder App
+A native Android mobile application that fetches Latitude and Longitude of people and diplays their locations on Google Maps
 
 ## Getting Started
 Clone the project with the command git clone https://github.com/NihinFaj/Friend_Finder_App
